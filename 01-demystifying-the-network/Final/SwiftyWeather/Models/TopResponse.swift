@@ -33,7 +33,7 @@
 import Foundation
 
 /// The top level response object from the weather fetch.
-struct TopResponse: Codable {
+struct TopResponse: Decodable {
   /// The unique identifier for the city's weather that was fetched.
   let id: Int
 
@@ -47,8 +47,8 @@ struct TopResponse: Codable {
   let temperatureData: TemperatureData
 
   enum CodingKeys: String, CodingKey {
-    case id = "id"
-    case name = "name"
+    case id
+    case name
     case weatherConditions = "weather"
     case temperatureData = "main"
   }

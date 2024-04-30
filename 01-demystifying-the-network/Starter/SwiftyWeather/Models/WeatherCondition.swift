@@ -35,4 +35,4 @@ import Foundation
 /// An object that describes the various conditions the weather can be in.
 ///
 /// This object is described as `weather` in the OpenWeatherMap API.
-struct WeatherCondition: Codable {}
+struct WeatherCondition: Decodable {}

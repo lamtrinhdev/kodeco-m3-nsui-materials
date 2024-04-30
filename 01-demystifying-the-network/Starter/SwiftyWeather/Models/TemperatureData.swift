@@ -35,4 +35,4 @@ import Foundation
 /// An object that represents the various temperature related data.
 ///
 /// This object is called `main` from the OpenWeatherMap API.
-struct TemperatureData: Codable {}
+struct TemperatureData: Decodable {}

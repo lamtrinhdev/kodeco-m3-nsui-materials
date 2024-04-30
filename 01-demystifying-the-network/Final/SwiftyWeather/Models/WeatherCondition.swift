@@ -35,7 +35,7 @@ import Foundation
 /// An object that describes the various conditions the weather can be in.
 ///
 /// This object is described as `weather` in the OpenWeatherMap API.
-struct WeatherCondition: Codable {
+struct WeatherCondition: Decodable {
   /// The unique ID for this particular condition
   let id: Int
 
@@ -51,7 +51,7 @@ struct WeatherCondition: Codable {
 
   /// These keys represent the actual property names from the OpenWeatherMap API.
   enum CodingKeys: String, CodingKey {
-    case id = "id"
+    case id
     case categoryDescription = "description"
     case iconString = "icon"
   }

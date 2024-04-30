@@ -33,4 +33,4 @@
 import Foundation
 
 /// The top level response object from the weather fetch.
-struct TopResponse: Codable {}
+struct TopResponse: Decodable {}

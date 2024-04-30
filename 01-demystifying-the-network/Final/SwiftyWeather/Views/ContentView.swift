@@ -64,7 +64,7 @@ struct ContentView: View {
         } else {
           VStack {
             ContentUnavailableView(
-              errorMessage ?? "Please enter a city above",
+              errorMessage ?? "Please type a city above and press enter",
               systemImage: "magnifyingglass"
             )
           }

@@ -58,24 +58,25 @@ final class WeatherViewModel {
   func fetchWeather(for cityName: String) {
     isSearching.toggle()
     networkService.fetchWeather(for: cityName) { [weak self] result in
+      guard let self else { return }
       switch result {
       case .success(let topResponse):
-        self?.topResponse = topResponse
-        self?.isSearching.toggle()
+        self.topResponse = topResponse
+        self.isSearching.toggle()
       case .failure(let error):
         switch error {
         case .apiError:
-          self?.errorMessage = "API Error"
+          self.errorMessage = "API Error"
         case .decodeError(let message, _):
-          self?.errorMessage = "\(message)"
+          self.errorMessage = "\(message)"
         case .invalidResponse:
-          self?.errorMessage = "Invalid City Name"
+          self.errorMessage = "Invalid City Name"
         case .invalidURL:
-          self?.errorMessage = "Invalid URL"
+          self.errorMessage = "Invalid URL"
         case .noData:
-          self?.errorMessage = "No data"
+          self.errorMessage = "No data"
         }
-        self?.isSearching.toggle()
+        self.isSearching.toggle()
       }
     }
   }
