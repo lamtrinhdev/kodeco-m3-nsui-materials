@@ -50,29 +50,29 @@ struct ContentView: View {
     .searchable(text: $searchText, prompt: Text("City Name"))
     .onSubmit(of: .search) {
       let apiKey = "YOUR API KEY HERE"
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(searchText)&appid=\(apiKey)") else {
-          print("Invalid URL")
+      guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(searchText)&appid=\(apiKey)") else {
+        print("Invalid URL")
+        return
+      }
+      let session = URLSession.shared
+      let task = session.dataTask(with: url) { data, response, error in
+        if let error {
+          print("Error: \(error.localizedDescription)")
           return
         }
-        let session = URLSession.shared
-        let task = session.dataTask(with: url) { data, response, error in
-          if let error {
-            print("Error: \(error.localizedDescription)")
-            return
-          }
 
-          guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
-            print("Invalid Response")
-            return
-          }
-
-          guard let data else {
-            print("No data received")
-            return
-          }
-          print(String(data: data, encoding: .utf8) ?? "")
+        guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+          print("Invalid Response")
+          return
         }
-        task.resume()
+
+        guard let data else {
+          print("No data received")
+          return
+        }
+        print(String(data: data, encoding: .utf8) ?? "")
+      }
+      task.resume()
     }
   }
 }
