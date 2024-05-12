@@ -33,10 +33,4 @@
 import Foundation
 
 /// Represents an object that is capable of fetching weather data.
-protocol WeatherFetchable {
-  /// A method that fetches weather data based on city name.
-  /// - Parameters:
-  ///   - cityName: The name of the city being fetched.
-  ///   - completion: The closure being called when the fetching is complete. This returns either a `TopResponse` object containing the weather data or a `NetworkError`.
-  func fetchWeather(for cityName: String, completion: @escaping (Result<TopResponse, NetworkError>) -> Void)
-}
+protocol WeatherFetchable {}

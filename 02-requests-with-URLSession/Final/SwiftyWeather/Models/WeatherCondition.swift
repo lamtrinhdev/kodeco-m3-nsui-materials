@@ -35,24 +35,4 @@ import Foundation
 /// An object that describes the various conditions the weather can be in.
 ///
 /// This object is described as `weather` in the OpenWeatherMap API.
-struct WeatherCondition: Decodable {
-  /// The unique ID for this particular condition
-  let id: Int
-
-  /// A string describing the type of weather such as clear sky or thunderstorm.
-  let categoryDescription: String
-
-  /// A string that describes the unique icons associated with this particular weather condition.
-  ///
-  /// This particular API has 9 pre-defined icons associated with certain weather conditions. 
-  /// The `iconLookupTable` in the `WeatherIconView` has the mapping that maps these specific icon strings
-  /// to SFSymbols we can use in our app.
-  let iconString: String
-
-  /// These keys represent the actual property names from the OpenWeatherMap API.
-  enum CodingKeys: String, CodingKey {
-    case id
-    case categoryDescription = "description"
-    case iconString = "icon"
-  }
-}
+struct WeatherCondition: Decodable {}

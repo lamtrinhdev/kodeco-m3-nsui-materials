@@ -35,19 +35,4 @@ import Foundation
 /// An object that represents the various temperature related data.
 ///
 /// This object is called `main` from the OpenWeatherMap API.
-struct TemperatureData: Decodable {
-  /// The current temperature of the location being fetched.
-  let current: Double
-
-  /// The low end range of the temperature from the location being fetched.
-  let low: Double
-
-  /// The high end range of the temperature from the location being fetched.
-  let high: Double
-
-  enum CodingKeys: String, CodingKey {
-    case current = "temp"
-    case low = "temp_min"
-    case high = "temp_max"
-  }
-}
+struct TemperatureData: Decodable {}

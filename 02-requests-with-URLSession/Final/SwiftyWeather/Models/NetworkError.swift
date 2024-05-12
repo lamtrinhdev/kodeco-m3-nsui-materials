@@ -33,18 +33,4 @@
 import Foundation
 
 /// Represents the error states that can happen when fetching data over the network.
-enum NetworkError: Error {
-  /// An error occured with the API
-  case apiError
-  /// The URL used to perform the fetch its invalid.
-  case invalidURL
-
-  /// The response returned from the server was outside of the range we want and is invalid.
-  case invalidResponse
-
-  /// Unable to obtain any data from network fetch.
-  case noData
-
-  /// Unable to decode the data fetched from the network request.
-  case decodeError(message: String, error: Error?)
-}
+enum NetworkError: Error {}

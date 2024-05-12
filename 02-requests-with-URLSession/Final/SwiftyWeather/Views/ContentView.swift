@@ -38,49 +38,41 @@ struct ContentView: View {
   @State private var searchText = ""
   @State private var errorMessage: String?
 
-  private var weatherViewModel = WeatherViewModel()
-
   var body: some View {
     NavigationStack {
-      if let topResponse = weatherViewModel.topResponse {
-        VStack {
-          WeatherIconView(iconString: topResponse.weatherConditions[0].iconString)
-          Text(topResponse.name)
-            .font(.title)
-          Text(topResponse.temperatureData.current.formattedTemp)
-            .font(.largeTitle)
-          Text(topResponse.weatherConditions.first?.categoryDescription.capitalized ?? "")
-            .font(.title3)
-          HStack {
-            Text("H: \(topResponse.temperatureData.high.formattedTemp)")
-              .font(.headline)
-            Text("L: \(topResponse.temperatureData.low.formattedTemp)")
-              .font(.headline)
-          }
-        }
-      } else {
-        if weatherViewModel.isSearching {
-          ProgressView()
-        } else {
-          VStack {
-            ContentUnavailableView(
-              errorMessage ?? "Please type a city above and press enter",
-              systemImage: "magnifyingglass"
-            )
-          }
-        }
+      VStack {
+        ContentUnavailableView(
+          errorMessage ?? "Please type a city above and press enter",
+          systemImage: "magnifyingglass"
+        )
       }
     }
     .searchable(text: $searchText, prompt: Text("City Name"))
     .onSubmit(of: .search) {
-      weatherViewModel.topResponse = nil
-      weatherViewModel.fetchWeather(for: searchText)
-    }
-    .onChange(of: weatherViewModel.errorMessage) { oldValue, newValue in
-      guard oldValue != newValue else {
-        return
-      }
-      self.errorMessage = newValue
+      let apiKey = "YOUR API KEY HERE"
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(searchText)&appid=\(apiKey)") else {
+          print("Invalid URL")
+          return
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: url) { data, response, error in
+          if let error {
+            print("Error: \(error.localizedDescription)")
+            return
+          }
+
+          guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+            print("Invalid Response")
+            return
+          }
+
+          guard let data else {
+            print("No data received")
+            return
+          }
+          print(String(data: data, encoding: .utf8) ?? "")
+        }
+        task.resume()
     }
   }
 }

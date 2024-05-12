@@ -33,23 +33,4 @@
 import Foundation
 
 /// The top level response object from the weather fetch.
-struct TopResponse: Decodable {
-  /// The unique identifier for the city's weather that was fetched.
-  let id: Int
-
-  /// The name of the city.
-  let name: String
-
-  /// Represents the various weather conditions a city can be in. The first is the `primary` weather condition.
-  let weatherConditions: [WeatherCondition]
-
-  /// Represents the current city termperature data
-  let temperatureData: TemperatureData
-
-  enum CodingKeys: String, CodingKey {
-    case id
-    case name
-    case weatherConditions = "weather"
-    case temperatureData = "main"
-  }
-}
+struct TopResponse: Decodable {}
