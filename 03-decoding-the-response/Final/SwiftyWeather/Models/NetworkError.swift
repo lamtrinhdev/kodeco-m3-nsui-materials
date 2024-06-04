@@ -34,8 +34,6 @@ import Foundation
 
 /// Represents the error states that can happen when fetching data over the network.
 enum NetworkError: Error {
-  /// An error occured with the API
-  case apiError
   /// The URL used to perform the fetch its invalid.
   case invalidURL
 

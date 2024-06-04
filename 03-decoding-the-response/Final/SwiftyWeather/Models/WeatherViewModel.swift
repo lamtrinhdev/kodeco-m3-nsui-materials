@@ -65,8 +65,6 @@ final class WeatherViewModel {
         self.isSearching.toggle()
       case .failure(let error):
         switch error {
-        case .apiError:
-          self.errorMessage = "API Error"
         case .decodeError(let message, _):
           self.errorMessage = "\(message)"
         case .invalidResponse:
